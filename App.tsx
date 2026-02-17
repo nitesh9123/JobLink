@@ -19,21 +19,22 @@ const BottomNav = () => {
     const navigate = useNavigate();
     const currentPath = location.pathname;
 
-    const isActive = (path: string) => {
-        if (path === '/') return currentPath === '/' || currentPath === '/dashboard';
-        return currentPath.startsWith(path);
-    };
+    // Hide bottom nav on login screen
+    if (currentPath === '/' || currentPath === '/login') return null;
 
-    if (currentPath === '/login') return null;
+    const isActive = (path: string) => {
+        if (currentPath === path) return true;
+        return path !== '/' && currentPath.startsWith(path);
+    };
 
     return (
         <nav className="absolute bottom-0 inset-x-0 h-20 bg-white/80 backdrop-blur-xl border-t border-[#d1cfe7] px-6 flex items-center justify-between pb-4 z-50 rounded-b-[30px]">
             <button 
                 onClick={() => navigate('/dashboard')}
-                className={`flex flex-col items-center gap-1 ${isActive('/') ? 'text-primary' : 'text-text-muted/60'}`}
+                className={`flex flex-col items-center gap-1 ${isActive('/dashboard') ? 'text-primary' : 'text-text-muted/60'}`}
             >
-                <span className={`material-symbols-outlined ${isActive('/') ? 'font-variation-fill' : ''}`}>home</span>
-                <span className={`text-[10px] ${isActive('/') ? 'font-bold' : 'font-medium'}`}>Home</span>
+                <span className={`material-symbols-outlined ${isActive('/dashboard') ? 'font-variation-fill' : ''}`}>home</span>
+                <span className={`text-[10px] ${isActive('/dashboard') ? 'font-bold' : 'font-medium'}`}>Home</span>
             </button>
 
             <button 
@@ -87,8 +88,8 @@ const App = () => {
         <HashRouter>
             <MobileContainer>
                 <Routes>
+                    <Route path="/" element={<LoginScreen />} />
                     <Route path="/login" element={<LoginScreen />} />
-                    <Route path="/" element={<DashboardScreen />} />
                     <Route path="/dashboard" element={<DashboardScreen />} />
                     <Route path="/search" element={<SearchScreen />} />
                     <Route path="/jobs/:id" element={<JobDetailsScreen />} />

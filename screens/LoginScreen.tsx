@@ -14,12 +14,8 @@ const LoginScreen = () => {
             </div>
 
             {/* Header */}
-            <div className="relative z-10 flex items-center justify-between px-8 pt-12">
-                <button className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-lg border border-white/30 text-white">
-                    <span className="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
-                </button>
+            <div className="relative z-10 flex items-center justify-center px-8 pt-12">
                 <span className="text-white/40 font-bold tracking-[0.2em] text-[10px] uppercase">Career Elite</span>
-                <div className="w-10"></div>
             </div>
 
             {/* Content */}
